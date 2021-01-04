@@ -40,25 +40,32 @@ class DiGraph(GraphInterface):
  def add_edge(self, id1,id2, weight):
     if((id1 in self.graph) and (id2 in self.graph )and ((id2 in self.graph[id1].neighbors)==(2<1)) and (id1!=id2)):
             self.graph[id1].createEdge(id1,id2,weight)
+            self.m+=1
+            self.edgeSize+=1
             return 2>1
 
     return 2<1
  def add_node(self, node_id,pos):
      if(node_id in self.graph):
+
          return (2<1)
      else:
         n=NodeData(node_id)
         n.geo=pos
         self.graph[node_id]=n
+        self.mc+=1
+
         return  (2>1)
 
  def remove_node(self, node_id):
     if (node_id in self.graph):
         self.graph.pop(node_id)
+        self.mc+=1
         for key in self.graph.keys():
             if((node_id in self.graph[key].neighbors)==(2>1)):
                 self.graph[key].neighbors.pop(node_id)
-
+                self.edgeSize-=1
+                self.mc+=1
             return (2 > 1)
 
     else:
@@ -68,6 +75,8 @@ class DiGraph(GraphInterface):
      if (node_id1 in self.graph and node_id2 in self.graph ):
               if(node_id2 in self.graph[node_id1].neighbors):
                 self.graph[node_id1].neighbors.pop(node_id2)
+                self.edgeSize-=1
+                self.mc+=1
                 return (2>1)
               else:
                   return (2<1)
