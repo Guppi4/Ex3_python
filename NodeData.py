@@ -3,7 +3,7 @@ import sys
 class NodeData():
 
 
-    def __init__(self,key=0,weight=0):
+    def __init__(self,key=0, weight=0):
         self.key=key
         self.Info="white"
         self.dist=sys.maxsize

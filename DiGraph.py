@@ -30,32 +30,69 @@ class DiGraph(GraphInterface):
     return t
  def all_out_edges_of_node(self, id1):
      t={}
-     for key in self.graph[id1].neighbors:
+     for key in self.graph[id1].neighbors.keys():
             t[key]=self.graph[id1].neighbors[key].w
      return t
 
+ def get_mc(self):
+     return self.mc
 
+ def add_edge(self, id1,id2, weight):
+    if((id1 in self.graph) and (id2 in self.graph )and ((id2 in self.graph[id1].neighbors)==(2<1)) and (id1!=id2)):
+            self.graph[id1].createEdge(id1,id2,weight)
+            return 2>1
 
+    return 2<1
+ def add_node(self, node_id,pos):
+     if(node_id in self.graph):
+         return (2<1)
+     else:
+        n=NodeData(node_id)
+        n.geo=pos
+        self.graph[node_id]=n
+        return  (2>1)
 
+ def remove_node(self, node_id):
+    if (node_id in self.graph):
+        self.graph.pop(node_id)
+        for key in self.graph.keys():
+            if((node_id in self.graph[key].neighbors)==(2>1)):
+                self.graph[key].neighbors.pop(node_id)
 
+            return (2 > 1)
 
+    else:
+        return (2 < 1)
+
+ def remove_edge(self, node_id1, node_id2):
+     if (node_id1 in self.graph and node_id2 in self.graph ):
+              if(node_id2 in self.graph[node_id1].neighbors):
+                self.graph[node_id1].neighbors.pop(node_id2)
+                return (2>1)
+              else:
+                  return (2<1)
+     else:
+         return (2<1)
 
 
 
 
 
 if __name__ == "__main__":
-    t=DiGraph()
-    t2=NodeData(1,7)
-    t.graph[1]=t2
-    t3 = NodeData(2,99)
-    t2.createEdge(1,2,9)
-    t.graph[2]=t3
+    t = DiGraph()
+    t2 = NodeData(1, 7)
+    t.graph[1] = t2
+    t3 = NodeData(2, 99)
+    t2.createEdge(1, 2, 9)
+    t.graph[2] = t3
     t4 = NodeData(3, 4)
-    t4.createEdge(2, 1, 8)
+    t4.createEdge(3, 2, 8)
     t.graph[3] = t4
-    print(t.all_in_edges_of_node(1))
-    #print(t.get_all_v())
-    print(t.all_out_edges_of_node(1))
+    #print(t.all_out_edges_of_node(1))
+    #print(t.add_node())
+    #print(t.add_edge(3,3,9))
+
+    print(t.remove_edge(1,2))
+
 
 
