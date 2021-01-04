@@ -1,5 +1,5 @@
 
-
+from NodeData import NodeData
 from GraphInterface import GraphInterface
 
 
@@ -15,12 +15,29 @@ class DiGraph(GraphInterface):
    return len(self.graph)
 
 
- def e_size(self) :
-    print("ffff")
+ def e_size(self):
+    return self.edgeSize
+
+ def  get_all_v(self):
+     return self.graph.values()
+
+ def all_in_edges_of_node(self,id):
+    t={}
+    for key in self.graph.values():
+         if(self.graph[key].getEdge(id)!=None):
+             t0=self.graph[key].getEdge(id)
+             t[key]=self.graph[key]
+    return t
+
+
+
 
 
 
 if __name__ == "__main__":
-    t=GraphInterface()
-    t.v_size()
+    t=DiGraph()
+    t2=NodeData()
+    t.graph[1]=t2
+    t3=t.graph[1]
+    print(t3.Info)
 
