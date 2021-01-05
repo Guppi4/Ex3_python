@@ -40,21 +40,53 @@ class GraphAlgo(GraphAlgoInterface):
         except IOError as e:
            print(e)
 
+    def load_from_json(self, file_name):
+        try:
+            with open(file_name,"r") as file:
+               d=json.load(file)
+               g=DiGraph()
+               temp={}
+               nodes=d["Nodes"]
+               edges=d["Edges"]
+
+               for i in nodes:
+                   n=NodeData(i["id"])
+                   a={}
+                   c=0;
+                   for s in i["pos"].split(","):
+                       a[c]=s
+                       c+=1
+
+                   n.setLocation(a[0],a[1],a[2])
+                   g.add_node(n.key,n.geo)
+               for j in edges:
+                   e=NodeData.EdgeData(j["src"],j["dest"],j["w"])
+                   g.graph[j["src"]].neighbors[j["dest"]]=e
+               self.graph=g
+               print(2>1)
+        except IOError as e:
+            print(e)
+            return 0
+
+
+
 
 
 if __name__ == "__main__":
     t = DiGraph()
     t2 = NodeData(1, 7)
+
     t.graph[1] = t2
     t3 = NodeData(2, 99)
     t2.createEdge(1, 2, 9)
+
     t.graph[2] = t3
     t4 = NodeData(3, 4)
     t4.createEdge(3, 2, 8)
     t.graph[3] = t4
     g=GraphAlgo()
     g.graph=t
-    g.save_to_json("file")
+    g.load_from_json("file")
 
 
 
