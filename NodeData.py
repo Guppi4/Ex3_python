@@ -48,10 +48,11 @@ class NodeData():
 
 
     class Location():
+
        def __init__(self):
-          self.x=0
-          self.y=0
-          self.z=0
+          self.x=0.0
+          self.y=0.0
+          self.z=0.0
 
        def distance(self, g):
            dx=self.x-g.x
