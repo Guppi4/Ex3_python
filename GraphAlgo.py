@@ -27,9 +27,16 @@ class GraphAlgo(GraphAlgoInterface):
             for key2 in self.graph.graph[key].neighbors.keys():
                 edge={}
                 edge["src"]=self.graph.graph[key].neighbors[key2].src
+                edge["w"] = self.graph.graph[key].neighbors[key2].w
+                edge["dest"] = self.graph.graph[key].neighbors[key2].dest
+                edges.append(edge)
+
+        graph["Edges"]=edges
+        graph["Nodes"] =nodes
+
         try:
             with open(file_name, "w") as file:
-               json.dump(nodes,  fp=file)
+               json.dump(graph,  fp=file)
         except IOError as e:
            print(e)
 
