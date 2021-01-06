@@ -40,7 +40,7 @@ class DiGraph(GraphInterface):
  def add_edge(self, id1,id2, weight):
     if((id1 in self.graph) and (id2 in self.graph )and ((id2 in self.graph[id1].neighbors)==(2<1)) and (id1!=id2)):
             self.graph[id1].createEdge(id1,id2,weight)
-            self.m+=1
+            self.mc+=1
             self.edgeSize+=1
             return 2>1
 

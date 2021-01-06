@@ -60,8 +60,9 @@ class GraphAlgo(GraphAlgoInterface):
                    n.setLocation(a[0],a[1],a[2])
                    g.add_node(n.key,n.geo)
                for j in edges:
-                   e=NodeData.EdgeData(j["src"],j["dest"],j["w"])
-                   g.graph[j["src"]].neighbors[j["dest"]]=e
+
+                   g.add_edge(j["src"],j["dest"],j["w"])
+
                self.graph=g
                print(2>1)
         except IOError as e:
@@ -86,7 +87,8 @@ if __name__ == "__main__":
     t.graph[3] = t4
     g=GraphAlgo()
     g.graph=t
-    g.load_from_json("file")
-
+    g.load_from_json("b.txt")
+    print("f")
+    print("g")
 
 
