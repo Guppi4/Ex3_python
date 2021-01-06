@@ -1,6 +1,11 @@
 from math import sqrt
 import sys
+from functools import cmp_to_key
+
 class NodeData():
+
+    def __lt__(self, other):
+        return self.tag < other.tag
 
 
     def __init__(self,key=0, weight=0):

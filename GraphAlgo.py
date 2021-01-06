@@ -4,8 +4,8 @@ import json
 from DiGraph import DiGraph
 from GraphAlgoInterface import GraphAlgoInterface
 from NodeData import NodeData
-
-
+from queue import PriorityQueue
+import sys
 class GraphAlgo(GraphAlgoInterface):
     def __init__(self):
         self.graph=DiGraph()
@@ -69,26 +69,62 @@ class GraphAlgo(GraphAlgoInterface):
             print(e)
             return 0
 
+    def Dijkstra(self,src,g):
+        q=PriorityQueue()
+        n=g.graph.get(src)
+        for key in g.graph.keys():
+            g.graph[key].tag=sys.maxsize
+            g.graph[key].info="white"
+            q.put(g.graph[key])
+        n.tag=0
+        while not q.empty():
+            u=q.get()
+            for a in u.neighbors.keys():
+                a2=g.graph[a]
+                if(g.graph[a].Info!="red"):
+                    t=u.tag+g.graph[u.key].neighbors[a].w
+                    if(g.graph.get(a).tag>t):
+                        a2.tag=t
+                        q.get(g.graph[a])
+                        q.put(a2)
+            u.Info="red"
+
 
 
 
 
 if __name__ == "__main__":
     t = DiGraph()
-    t2 = NodeData(1, 7)
+    t.add_node(1,0)
+    t.add_node(2,0)
+    t.add_node(3,0)
+    t.add_node(4,0)
+    t.add_edge(1,2,1)
+    t.add_edge(1,4,8)
+    t.add_edge(2,3,4)
+    t.add_edge(4,3,3)
 
-    t.graph[1] = t2
-    t3 = NodeData(2, 99)
-    t2.createEdge(1, 2, 9)
-
-    t.graph[2] = t3
-    t4 = NodeData(3, 4)
-    t4.createEdge(3, 2, 8)
-    t.graph[3] = t4
     g=GraphAlgo()
-    g.graph=t
-    g.load_from_json("b.txt")
-    print("f")
-    print("g")
+    g.Dijkstra(1,t)
+    print(t.graph[3].tag)
+
+
+
+
+    q = PriorityQueue()
+
+
+
+   # while not q.empty():
+       # print(q.get().tag)
+       # q.task_done()
+    #print(q.get().tag)
+   # print(q.queue)
+
+
+
+   # g.graph=t
+    #g.load_from_json("b.txt")
+
 
 
