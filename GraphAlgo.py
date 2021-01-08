@@ -69,6 +69,8 @@ class GraphAlgo(GraphAlgoInterface):
             print(e)
             return 0
 
+
+
     def Dijkstra(self,src,g):
         q=PriorityQueue()
         n=g.graph.get(src)
@@ -85,9 +87,42 @@ class GraphAlgo(GraphAlgoInterface):
                     t=u.tag+g.graph[u.key].neighbors[a].w
                     if(g.graph.get(a).tag>t):
                         a2.tag=t
+                        a2.pred=u.key
                         q.get(g.graph[a])
                         q.put(a2)
             u.Info="red"
+    def  shortest_path(self, id1, id2):
+         path=[]
+         if(id1==id2):
+             return float('inf'), path
+         if ((id1  in self.graph.graph.keys())==False) or ((id2  in self.graph.graph.keys())==False):
+             return float('inf'), path
+
+         self.Dijkstra(id1, self.graph)
+         if(self.graph.graph[id2].tag==sys.maxsize):
+             for key in self.graph.graph.keys():
+                 self.graph.graph[key].tag = sys.maxsize
+                 self.graph.graph[key].info = "white"
+             return float('inf'),path
+
+         k=self.graph.graph[id2]
+         path.insert(0,id2)
+         w=0
+         while k.key!=id1:
+             k1=k.pred
+             w = w + self.graph.graph[k1].neighbors[k.key].w
+             k=self.graph.graph[k1]
+
+             path.insert(0,k.key)
+         return float(w),path
+
+
+
+
+
+
+
+
 
 
 
@@ -99,14 +134,16 @@ if __name__ == "__main__":
     t.add_node(2,0)
     t.add_node(3,0)
     t.add_node(4,0)
-    t.add_edge(1,2,1)
-    t.add_edge(1,4,8)
+    t.add_node(5,0)
+    t.add_edge(3,5,1)
+    t.add_edge(1,2,2)
+    t.add_edge(1,4,2)
     t.add_edge(2,3,4)
     t.add_edge(4,3,3)
 
     g=GraphAlgo()
-    g.Dijkstra(1,t)
-    print(t.graph[3].tag)
+    g.graph=t
+    print(g.shortest_path(1,6))
 
 
 

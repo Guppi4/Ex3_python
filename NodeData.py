@@ -16,7 +16,7 @@ class NodeData():
         self.weight=weight
         self.neighbors={}
         self. geo=NodeData.Location
-
+        self.pred=0
     def getEdge(self,dest):
         if(self.neighbors==None):
             return None

@@ -32,7 +32,7 @@ class GraphAlgoInterface:
         Returns the shortest path from node id1 to node id2 using Dijkstra's Algorithm
         @param id1: The start node id
         @param id2: The end node id
-        @return: The distance of the path, a list of the nodes ids that the path goes through
+        @return: The distancme of the path, a list of the nodes ids that the path goes through
         Example:
 #      >>> from GraphAlgo import GraphAlgo
 #       >>> g_algo = GraphAlgo()
