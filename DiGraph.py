@@ -45,7 +45,11 @@ class DiGraph(GraphInterface):
             return 2>1
 
     return 2<1
- def add_node(self, node_id,pos):
+
+ def get_all_values(self):
+     return self.graph.values()
+
+ def add_node(self, node_id,pos=0):
      if(node_id in self.graph):
 
          return (2<1)
@@ -57,6 +61,10 @@ class DiGraph(GraphInterface):
 
         return  (2>1)
 
+ def get_node(self, id1: int):
+        if id1 not in self.graph:
+            return None
+        return self.graph[id1]
  def remove_node(self, node_id):
     if (node_id in self.graph):
         self.graph.pop(node_id)

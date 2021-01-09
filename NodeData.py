@@ -15,7 +15,8 @@ class NodeData():
         self.tag =sys.maxsize
         self.weight=weight
         self.neighbors={}
-        self. geo=NodeData.Location
+        self.disc = -1
+        self. geo=(0,0,0)
         self.pred=0
     def getEdge(self,dest):
         if(self.neighbors==None):
@@ -54,10 +55,10 @@ class NodeData():
 
     class Location():
 
-       def __init__(self):
-          self.x=0.0
-          self.y=0.0
-          self.z=0.0
+       def __init__(self,x=0,y=0,z=0):
+          self.x=x
+          self.y=y
+          self.z=z
 
        def distance(self, g):
            dx=self.x-g.x
